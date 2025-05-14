@@ -1,25 +1,15 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// Comando para visitar home e validar a URL
+Cypress.Commands.add('navegarParaHome', () => {
+    cy.visit('https://meulivrodereceitas.vercel.app/')
+    cy.url().should('include', '/home')
+  })
+  
+// Comando para pesquisar uma receita e clicar no primeiro item relacionado
+
+  Cypress.Commands.add('pesquisarReceita', (termo) => {
+    cy.get('input[placeholder*="Procurar receitas"]').type(termo)
+    cy.get('a')
+      .contains(termo)
+      .should('be.visible')
+      .click()
+  })
